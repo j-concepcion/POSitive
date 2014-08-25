@@ -61,6 +61,7 @@ gem 'rails_layout', group: :development
 gem 'spinach-rails', group: [:development, :test]
 gem 'spring-commands-spinach'
 gem 'guard-spinach'
+gem 'bootstrap-datepicker-rails', '~> 1.3.0.2'
 
 gem 'simple_form'
 

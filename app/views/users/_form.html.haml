@@ -16,6 +16,7 @@
         = label_tag(nil, nil, class: 'radio-inline') do
           = f.radio_button :status, a.first
           = a.first
+    = f.input :birthday, as: :string, input_html: { 'data-provide' => 'datepicker'}
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.button :submit
