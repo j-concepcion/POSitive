@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    = activity.owner.name
+    = "updated user"
+    = link_to activity.trackable.name, activity.trackable
+    = time_ago_in_words(activity.created_at)
+    = "ago"

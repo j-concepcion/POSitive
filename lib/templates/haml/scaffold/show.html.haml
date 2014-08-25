@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        <%= singular_table_name.titleize %> Detail
+        = link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Edit <%= singular_table_name %>" do
+          %span.glyphicon.glyphicon-edit
+        = link_to <%= index_helper %>_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "<%= plural_table_name.titleize %> index" do
+          %span.glyphicon.glyphicon-list
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+.row
+  .col-md-2
+    <strong><%= attribute.human_name %>:</strong>
+  .col-md-10
+    = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>

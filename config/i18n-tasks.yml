@@ -1,0 +1,29 @@
+base_locale: en
+locales:
+- en
+data:
+  adapter: I18n::Tasks::Data::FileSystem
+  read:
+  - config/locales/%{locale}.yml
+  write:
+  - config/locales/%{locale}.yml
+relative_roots:
+- app/views
+search:
+  scanner: I18n::Tasks::Scanners::PatternWithScopeScanner
+  relative_roots:
+  - app/views
+  paths:
+  - app/
+  exclude:
+  - "*.jpg"
+  - "*.png"
+  - "*.gif"
+  - "*.svg"
+  - "*.ico"
+  - "*.eot"
+  - "*.ttf"
+  - "*.woff"
+  - "*.pdf"
+  ignore_lines:
+  - "^\\s*[#/](?!\\si18n-tasks-use)"

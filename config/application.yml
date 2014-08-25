@@ -1,0 +1,60 @@
+default: &default
+  application:
+    name:
+      full: Base Web Application System
+      acronym: BWAS
+    copyright:
+      holder: Copyright Holder
+    mailer:
+      from: admin@baseapp.com
+    roles: # this must be an array, and once you use it, must retain entries. Do not remove any of the values
+      - admin
+      - inventory
+      - accounting
+      - executive
+  login:
+    timeout: <%= 4.hours %>
+    maximum_attempts: 20
+    unlock_in: <%= 1.hours %>
+  mailer:
+    delivery_method: :smtp
+    address: localhost
+    port: 1025
+    user_name: admin@baseapp.com
+    password: dr0wss@p
+    asset_host: http://localhost:3000/
+    default_url_options:
+      host: localhost
+      port: 3000
+  kaminari:
+    default_per_page: 25
+    window:           4
+    outer_window:     0
+    left:             0
+    right:            0
+    page_method_name: :page
+    param_name:       :page
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  mailer:
+    delivery_method: :test
+    address: localhost
+    port: 1025
+    user_name: admin@baseapp.com
+    password: dr0wss@p
+    asset_host: http://localhost:3000/
+    default_url_options:
+      host: localhost
+      port: 3000
+
+production:
+  <<: *default
+  login:
+    timeout: <%= 30.minutes %>
+    maximum_attempts: 3
+  mailer:
+    delivery_method: test

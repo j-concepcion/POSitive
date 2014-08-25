@@ -1,0 +1,8 @@
+= simple_form_for @<%= singular_table_name %>, html:{class: 'form-horizontal', role: 'form'} do |f|
+  = form_error_notification(f)
+<%- attributes.each do |attribute| -%>
+  = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+<%- end -%>
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit

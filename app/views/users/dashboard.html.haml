@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    .jumbotron
+      %h1= "Hello, #{current_user.first_name}!"
+      %p ...
+      %p
+        %a.btn.btn-primary.btn-lg{role: "button"} Learn more
+.row
+  .col-md-12
+    = render_activities(@activities)

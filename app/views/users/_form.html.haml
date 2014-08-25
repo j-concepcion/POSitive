@@ -1,0 +1,21 @@
+= simple_form_for @user, html:{class: 'form-horizontal', role: 'form'} do |f|
+  = form_error_notification(f)
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :email
+  - if current_user.is_admin?
+    / = f.input :roles, :collection => User::ROLES, :as => :check_boxes
+    = f.input :roles, inner_wrapper_html: {class: 'checkbox'} do
+      - User::ROLES.each do |a|
+        = label_tag(nil, nil, class: 'checkbox-inline') do
+          = check_box_tag 'user[roles][]', a, @user.roles.include?(a)
+          = a
+    / = f.input :status, as: :radio_buttons, collection: User.statuses.to_a, label_method: :first, value_method: :last
+    = f.input :status, inner_wrapper_html: {class: 'radio'} do
+      - User.statuses.to_a.each do |a|
+        = label_tag(nil, nil, class: 'radio-inline') do
+          = f.radio_button :status, a.first
+          = a.first
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit
