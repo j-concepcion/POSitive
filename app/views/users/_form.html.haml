@@ -17,6 +17,9 @@
           = f.radio_button :status, a.first
           = a.first
     = f.input :birthday, as: :string, input_html: { 'data-provide' => 'datepicker'}
+    = f.input :age
+    = f.input :address
+    = f.input :contact_number
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.button :submit

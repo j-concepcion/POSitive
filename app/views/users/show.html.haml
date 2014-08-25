@@ -29,6 +29,27 @@
     = roles_list(@user.roles)
 .row
   .col-md-2
+    %b Age:
+  .col-md-10
+    = @user.age
+.row
+  .col-md-2
+    %b Birthday:
+  .col-md-10
+    = @user.birthday
+.row
+  .col-md-2
+    %b Address:
+  .col-md-10
+    = @user.address
+.row
+  .col-md-2
+    %b Contact Number:
+  .col-md-10
+    = @user.contact_number 
+.row
+  .col-md-2
     %b Status:
   .col-md-10
     = @user.status
+
