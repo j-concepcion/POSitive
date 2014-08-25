@@ -1,0 +1,24 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Product Detail
+        = link_to edit_product_path(@product), class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Edit product" do
+          %span.glyphicon.glyphicon-edit
+        = link_to products_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Products index" do
+          %span.glyphicon.glyphicon-list
+.row
+  .col-md-2
+    <strong>Item name:</strong>
+  .col-md-10
+    = @product.item_name
+.row
+  .col-md-2
+    <strong>Category:</strong>
+  .col-md-10
+    = @product.category
+.row
+  .col-md-2
+    <strong>Price:</strong>
+  .col-md-10
+    = @product.price
