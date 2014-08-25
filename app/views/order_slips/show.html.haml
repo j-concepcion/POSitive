@@ -1,0 +1,29 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Order Slip Detail
+        = link_to edit_order_slip_path(@order_slip), class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Edit order_slip" do
+          %span.glyphicon.glyphicon-edit
+        = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
+          %span.glyphicon.glyphicon-list
+.row
+  .col-md-2
+    <strong>Order type:</strong>
+  .col-md-10
+    = @order_slip.order_type
+.row
+  .col-md-2
+    <strong>Table number:</strong>
+  .col-md-10
+    = @order_slip.table_number
+.row
+  .col-md-2
+    <strong>Takeout number:</strong>
+  .col-md-10
+    = @order_slip.takeout_number
+.row
+  .col-md-2
+    <strong>Quantity:</strong>
+  .col-md-10
+    = @order_slip.quantity

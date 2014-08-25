@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :order_slips
+
   resources :products
 
   devise_for :users

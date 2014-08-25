@@ -8,6 +8,10 @@
 
 PublicActivity.enabled = false
 
+##########################################################
+# USERS
+##########################################################
+
 User.create(
   first_name: 'System',
   last_name: 'Administrator',
@@ -29,3 +33,51 @@ User.create(
     password_confirmation: 'password'
   )
 end
+
+##########################################################
+# PRODUCTS (MENU)
+##########################################################
+
+Product.create(
+  [{item_name: 'Sisigsilog',
+    category: 'Silog',
+    price: '50'}, {
+    item_name: 'Tapsilog',
+    category: 'Silog',
+    price: '55'}, {
+    item_name: 'Spamsilog',
+    category: 'Silog',
+    price: '60'}, {
+    item_name: 'Chixilog',
+    category: 'Silog',
+    price: '60'}, {
+    item_name: 'Porksilog',
+    category: 'Silog',
+    price: '60'}, {
+    item_name: 'Bolognasilog',
+    category: 'Silog',
+    price: '45'}, {
+    item_name: 'Hotsilog',
+    category: 'Silog',
+    price: '45'}, {
+    item_name: 'Baconsilog',
+    category: 'Silog',
+    price: '60'}, {
+    item_name: 'Liemposilog',
+    category: 'Silog',
+    price: '60'}, {
+    item_name: 'Tosilog',
+    category: 'Silog',
+    price: '45'}, {
+    item_name: 'Sausagesilog',
+    category: 'Silog',
+    price: '50'}, {
+    item_name: 'Longsilog',
+    category: 'Silog',
+    price: '40'}, {
+    item_name: 'Cornedbeefsilog',
+    category: 'Silog',
+    price: '40'}, {
+    item_name: 'Embosilog',
+    category: 'Silog',
+    price: '45'}])

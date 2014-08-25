@@ -1,0 +1,9 @@
+= simple_form_for @order_slip, html:{class: 'form-horizontal', role: 'form'} do |f|
+  = form_error_notification(f)
+  = f.input :order_type
+  = f.input :table_number
+  = f.input :takeout_number
+  = f.input :quantity
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit

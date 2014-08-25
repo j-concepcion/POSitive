@@ -1,0 +1,9 @@
+.row
+  .col-md-12
+    %h1
+      New order_slip
+      = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
+        %span.glyphicon.glyphicon-list
+.row
+  .col-md-12
+    = render 'form'
