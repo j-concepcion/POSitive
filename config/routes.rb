@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   resources :order_slips
-
   resources :products
 
-  devise_for :users
+  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   resources :users do
     collection do
       get 'dashboard'
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root :to => 'users#dashboard', :as => :authenticated_root
   end
-  root :to => redirect('/users/sign_in')
+  root :to => redirect('/login')
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
