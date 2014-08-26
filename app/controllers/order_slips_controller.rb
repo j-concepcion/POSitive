@@ -14,10 +14,16 @@ class OrderSlipsController < ApplicationController
 
   # GET /order_slips/new
   def new
+    @order_slip.order_date = Date.today
+    3.times do
+      @order_slip.order_slip_items.build
+    end
+
   end
 
   # GET /order_slips/1/edit
   def edit
+    @order_slip.order_slip_items.build
   end
 
   # POST /order_slips
@@ -49,15 +55,16 @@ class OrderSlipsController < ApplicationController
     def set_order_slip
       @order_slip = OrderSlip.find(params[:id])
     end
-
+ 
     # Only allow a trusted parameter "white list" through.
     def order_slip_params
-      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :quantity)
+      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :order_date, :user_id,
+        order_slip_items_attributes: [:id, :product_id, :quantity, :_destroy])
     end
 
     # sanitize search parameters, consider implementing the ransackable methods
     def order_slip_search_params
-      params[:q].assert_valid_keys('s', 'order_type_cont', 'table_number_cont', 'takeout_number_cont', 'quantity_cont') unless params[:q].blank?
+      params[:q].assert_valid_keys('s', 'order_type_cont', 'table_number_cont', 'takeout_number_cont', 'user_id_cont') unless params[:q].blank?
       params[:q]
     end
     

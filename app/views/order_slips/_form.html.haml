@@ -1,9 +1,13 @@
 = simple_form_for @order_slip, html:{class: 'form-horizontal', role: 'form'} do |f|
   = form_error_notification(f)
-  = f.input :order_type
+  = f.input :order_date, as: :string, input_html: { 'data-provide' => 'datepicker'}, label: "Date"
+  = f.input :order_type, collection: OrderSlip::TYPES, as: :radio_buttons
   = f.input :table_number
   = f.input :takeout_number
-  = f.input :quantity
+  = f.simple_fields_for :order_slip_items do |i|
+    = i.input :product_id, collection: Product.order("item_name asc").all, label_method: "item_name", label: "Item Name"
+    = i.input :quantity, :input_html => { min: 0 }
+  = f.input :user_id, collection: User.where(:status => "active").order("first_name asc").all, label_method: "name", label: "Server"
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.button :submit

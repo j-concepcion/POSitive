@@ -1,0 +1,6 @@
+= simple_form_for @order_slip_item, html:{class: 'form-horizontal', role: 'form'} do |f|
+  = form_error_notification(f)
+  = f.input :quantity
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit

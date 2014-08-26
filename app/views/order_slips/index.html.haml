@@ -20,8 +20,8 @@
           = f.label :takeout_number_cont, class: 'sr-only'
           = f.input_field :takeout_number_cont, as: 'string', placeholder: 'Takeout number'
         .form-group
-          = f.label :quantity_cont, class: 'sr-only'
-          = f.input_field :quantity_cont, as: 'string', placeholder: 'Quantity'
+          = f.label :user_id_cont, class: 'sr-only'
+          = f.input_field :user_id_cont, as: 'string', placeholder: 'Waiter'
         = button_tag class: 'btn btn-default' do
           %span.glyphicon.glyphicon-search
         = link_to 'Clear', request.path
@@ -30,14 +30,14 @@
         %th= sort_link(@q, :order_type)
         %th= sort_link(@q, :table_number)
         %th= sort_link(@q, :takeout_number)
-        %th= sort_link(@q, :quantity)
+        %th= sort_link(@q, :user_id)
         %th
       - @order_slips.each do |order_slip|
         %tr
           %td= order_slip.order_type
           %td= order_slip.table_number
           %td= order_slip.takeout_number
-          %td= order_slip.quantity
+          %td= User.find(order_slip.user_id).name
           %td
             .btn-group.btn-group-xs
               = link_to order_slip, class: 'btn btn-primary' do

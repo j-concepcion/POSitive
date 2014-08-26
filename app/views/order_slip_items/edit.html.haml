@@ -1,0 +1,11 @@
+.row
+  .col-md-12
+    %h1
+      Editing order_slip_item
+      = link_to @order_slip_item, class: "btn btn-warning btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Discard changes" do
+        %span.glyphicon.glyphicon-refresh
+      = link_to order_slip_items_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slip Items index" do
+        %span.glyphicon.glyphicon-list
+.row
+  .col-md-12
+    = render 'form'

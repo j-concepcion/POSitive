@@ -1,0 +1,2 @@
+module OrderSlipItemsHelper
+end
