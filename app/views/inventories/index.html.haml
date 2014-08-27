@@ -1,0 +1,73 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Inventories Index
+        = link_to new_inventory_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add inventory" do
+          %span.glyphicon.glyphicon-plus
+.row
+  .col-md-12
+    .well
+      = search_form_for @q, html:{class: 'form-inline', role: 'form'} do |f|
+        %kbd Search
+        .form-group
+          = f.label :item_name_cont, class: 'sr-only'
+          = f.input_field :item_name_cont, as: 'string', placeholder: 'Item name'
+        .form-group
+          = f.label :quantity_cont, class: 'sr-only'
+          = f.input_field :quantity_cont, as: 'string', placeholder: 'Quantity'
+        .form-group
+          = f.label :buying_price_cont, class: 'sr-only'
+          = f.input_field :buying_price_cont, as: 'string', placeholder: 'Buying price'
+        .form-group
+          = f.label :selling_price_cont, class: 'sr-only'
+          = f.input_field :selling_price_cont, as: 'string', placeholder: 'Selling price'
+        .form-group
+          = f.label :date_purchased_cont, class: 'sr-only'
+          = f.input_field :date_purchased_cont, as: 'string', placeholder: 'Date purchased'
+        .form-group
+          = f.label :expiration_date_cont, class: 'sr-only'
+          = f.input_field :expiration_date_cont, as: 'string', placeholder: 'Expiration date'
+        .form-group
+          = f.label :waste_age_cont, class: 'sr-only'
+          = f.input_field :waste_age_cont, as: 'string', placeholder: 'Waste age'
+        = button_tag class: 'btn btn-default' do
+          %span.glyphicon.glyphicon-search
+        = link_to 'Clear', request.path
+    %table.table.table-condensed.table-hover
+      %tr
+        %th= sort_link(@q, :item_name)
+        %th= sort_link(@q, :quantity)
+        %th= sort_link(@q, :buying_price)
+        %th= sort_link(@q, :selling_price)
+        %th= sort_link(@q, :date_purchased)
+        %th= sort_link(@q, :expiration_date)
+        %th= sort_link(@q, :waste_age)
+        %th
+      - @inventories.each do |inventory|
+        %tr
+          %td= inventory.item_name
+          %td= inventory.quantity
+          %td= inventory.buying_price
+          %td= inventory.selling_price
+          %td= inventory.date_purchased
+          %td= inventory.expiration_date
+          %td= inventory.waste_age
+          %td
+            .btn-group.btn-group-xs
+              = link_to inventory, class: 'btn btn-primary' do
+                %span.glyphicon.glyphicon-eye-open
+                View              
+              %button.btn.btn-primary.dropdown-toggle{'type' => 'button', 'data-toggle' => 'dropdown'}
+                %span.caret
+                %span.sr-only Toggle Dropdown
+              %ul.dropdown-menu{role: 'menu'}
+                %li
+                  = link_to edit_inventory_path(inventory) do
+                    %span.glyphicon.glyphicon-edit
+                    Edit
+                %li
+                  = link_to inventory, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                    %span.glyphicon.glyphicon-trash
+                    Destroy
+    = paginate @inventories, theme: 'twitter-bootstrap-3', pagination_class: "pagination-sm"

@@ -1,0 +1,12 @@
+= simple_form_for @inventory, html:{class: 'form-horizontal', role: 'form'} do |f|
+  = form_error_notification(f)
+  = f.input :item_name
+  = f.input :quantity
+  = f.input :buying_price
+  = f.input :selling_price
+  = f.input :date_purchased
+  = f.input :expiration_date
+  = f.input :waste_age
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit

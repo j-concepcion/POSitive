@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :inventories
+
   resources :order_slip_items
 
   resources :order_slips
