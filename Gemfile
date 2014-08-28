@@ -64,6 +64,7 @@ gem 'guard-spinach'
 gem 'bootstrap-datepicker-rails', '~> 1.3.0.2'
 
 gem 'simple_form'
+gem 'nested_form'
 
 gem 'cancan'
 

@@ -15,10 +15,7 @@ class OrderSlipsController < ApplicationController
   # GET /order_slips/new
   def new
     @order_slip.order_date = Date.today
-    3.times do
-      @order_slip.order_slip_items.build
-    end
-
+    @order_slip.order_slip_items.build
   end
 
   # GET /order_slips/1/edit

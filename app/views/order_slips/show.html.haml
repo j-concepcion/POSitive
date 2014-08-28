@@ -34,13 +34,23 @@
     <strong>Server:</strong>
   .col-md-10
     = User.find(@order_slip.user_id).name
+
+- @total = 0
 .row
-  .col-md-2
-    <strong>Item/s:</strong>
-  .col-md-8
-    - @order_slip.order_slip_items.each do |i|
-      .row
-        .col-md-4
-          = Product.find(i.product_id).item_name
-        .col-md-4
-          = i.quantity
+  .col-md-12
+    %table.table-striped
+      %tr
+        %th Name
+        %th Quantity
+        %th Item Price
+        %th Total Price
+      - @order_slip.order_slip_items.each do |i|
+        %tr
+          %td= Product.find(i.product_id).item_name
+          %td= i.quantity
+          %td= Product.find(i.product_id).price
+          - @per_item = (i.quantity * Product.find(i.product_id).price)
+          %td= @per_item
+          - @total = @total + @per_item
+      %tr
+        %td= @total
