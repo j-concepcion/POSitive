@@ -68,6 +68,9 @@ gem 'nested_form'
 
 gem 'cancan'
 
+gem 'html2haml'
+gem 'erb2haml'
+
 gem 'pry-rails', group: :development
 
 gem 'faker', group: [:development, :test]

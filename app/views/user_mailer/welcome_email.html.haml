@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Welcome to #{::Base::Settings.application.name.acronym}, #{@user.first_name}
+    %p
+      You have successfully signed up to #{::Base::Settings.application.name.full}.
+      %br/
+    %p
+      To login to the site, just follow this link: #{new_user_session_url}. Your password is #{@password}.
+    %p Thanks for joining and have a great day!
