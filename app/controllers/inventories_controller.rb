@@ -24,6 +24,12 @@ class InventoriesController < ApplicationController
 
   # POST /inventories
   def create
+    Inventory.all.each do |i|
+      if (i.item_name == @inventory.item_name)
+        @inventory.quantity = @inventory.quantity + i.quantity
+        i.destroy
+      end
+    end
     if @inventory.save
       redirect_to @inventory, notice: 'Inventory was successfully created.'
     else
