@@ -2,10 +2,8 @@
   = form_error_notification(f)
   = f.input :item_name
   = f.input :quantity
-  = f.input :buying_price
-  = f.input :selling_price
-  = f.input :date_purchased
-  = f.input :expiration_date
+  = f.input :date_purchased, as: :string, input_html: { 'data-provide' => 'datepicker'}, label: "Date Purchased"
+  = f.input :expiration_date, as: :string, input_html: { 'data-provide' => 'datepicker'}, label: "Expiration Date"
   = f.input :waste_age
   .form-group
     .col-sm-offset-2.col-sm-10

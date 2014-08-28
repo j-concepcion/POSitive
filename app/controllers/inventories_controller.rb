@@ -14,6 +14,8 @@ class InventoriesController < ApplicationController
 
   # GET /inventories/new
   def new
+    @inventory.date_purchased = Date.today
+    @inventory.expiration_date = Date.today + 7.days
   end
 
   # GET /inventories/1/edit
