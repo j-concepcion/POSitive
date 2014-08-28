@@ -17,12 +17,6 @@
           = f.label :quantity_cont, class: 'sr-only'
           = f.input_field :quantity_cont, as: 'string', placeholder: 'Quantity'
         .form-group
-          = f.label :buying_price_cont, class: 'sr-only'
-          = f.input_field :buying_price_cont, as: 'string', placeholder: 'Buying price'
-        .form-group
-          = f.label :selling_price_cont, class: 'sr-only'
-          = f.input_field :selling_price_cont, as: 'string', placeholder: 'Selling price'
-        .form-group
           = f.label :date_purchased_cont, class: 'sr-only'
           = f.input_field :date_purchased_cont, as: 'string', placeholder: 'Date purchased'
         .form-group
@@ -38,8 +32,6 @@
       %tr
         %th= sort_link(@q, :item_name)
         %th= sort_link(@q, :quantity)
-        %th= sort_link(@q, :buying_price)
-        %th= sort_link(@q, :selling_price)
         %th= sort_link(@q, :date_purchased)
         %th= sort_link(@q, :expiration_date)
         %th= sort_link(@q, :waste_age)
@@ -48,8 +40,6 @@
         %tr
           %td= inventory.item_name
           %td= inventory.quantity
-          %td= inventory.buying_price
-          %td= inventory.selling_price
           %td= inventory.date_purchased
           %td= inventory.expiration_date
           %td= inventory.waste_age
