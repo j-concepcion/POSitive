@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828203744) do
+ActiveRecord::Schema.define(version: 20140829051305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,17 +35,14 @@ ActiveRecord::Schema.define(version: 20140828203744) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "inventories", force: true do |t|
+  create_table "market_food_inventories", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.string   "item_name"
     t.integer  "quantity"
-    t.date     "date_purchased"
-    t.date     "expiration_date"
-    t.string   "waste_age"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "order_slip_items", force: true do |t|
+  create_table "order_slip_items", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -61,7 +58,6 @@ ActiveRecord::Schema.define(version: 20140828203744) do
     t.datetime "updated_at"
     t.date     "order_date"
     t.uuid     "user_id"
-    t.decimal  "total_price"
   end
 
   create_table "products", id: :uuid, default: "uuid_generate_v1()", force: true do |t|

@@ -28,7 +28,7 @@ class OrderSlipsController < ApplicationController
     if @order_slip.save
       @order_slip.order_slip_items.each do |osi|
         product = Product.find(osi.product_id).item_name
-        inv_item = Inventory.find_by_item_name(product)
+        inv_item = MarketFoodInventory.find_by_item_name(product)
         inv_item.quantity = inv_item.quantity - osi.quantity
         inv_item.update_attribute(:quantity, inv_item.quantity)
       end

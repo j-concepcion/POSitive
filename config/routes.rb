@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :inventories
+  resources :market_food_inventories
+
+  get 'static_pages/inventory'
 
   resources :order_slip_items
 
