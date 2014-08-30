@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :trackable, :validatable, :lockable, :timeoutable
-  has_many :order_slips
+  has_many :order_slips, :dependent => :destroy
   
   include PublicActivity::Common
   

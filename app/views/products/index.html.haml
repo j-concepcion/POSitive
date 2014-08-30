@@ -32,7 +32,7 @@
         %tr
           %td= product.item_name
           %td= product.category
-          %td= number_with_precision(@product.price, precision: 2)
+          %td= number_with_precision(product.price, precision: 2)
           %td
             .btn-group.btn-group-xs
               = link_to product, class: 'btn btn-primary' do

@@ -19,19 +19,43 @@ User.create(
   status: :active,
   roles: ['admin'],
   password: 'password',
-  password_confirmation: 'password'
+  password_confirmation: 'password',
+  age: (rand(1..100)).to_i,
+  birthday: (rand(20..40.years)).ago,
+  contact_number: Faker::PhoneNumber.phone_number,
+  address: (Faker::Address.street_address+Faker::Address.city+Faker::Address.state).to_s
 )
 
-1.upto(99) do |i|
+1.upto(5) do |i|
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    email: "user#{"%02d" % i}@base.com",
+    email: "user#{i}@base.com",
     status: :active,
     roles: [User::ROLES[rand(User::ROLES.length)]],
     password: 'password',
-    password_confirmation: 'password'
-  )
+    password_confirmation: 'password',
+    age: (rand(1..100)).to_i,
+    birthday: (rand(20..40.years)).ago,
+    contact_number: Faker::PhoneNumber.phone_number,
+    address: (Faker::Address.street_address+Faker::Address.city+Faker::Address.state).to_s
+    )
+end
+
+6.upto(10) do |i|
+  User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: "user#{i}@base.com",
+    status: :active,
+    roles: [User::ROLES[rand(User::ROLES.length)]],
+    password: 'password',
+    password_confirmation: 'password',
+    age: (rand(1..100)).to_i,
+    birthday: (rand(20..40.years)).ago,
+    contact_number: Faker::PhoneNumber.phone_number,
+    address: (Faker::Address.street_address+Faker::Address.city+Faker::Address.state).to_s
+    )
 end
 
 ##########################################################
