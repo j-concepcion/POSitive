@@ -63,7 +63,7 @@ class MarketFoodInventoriesController < ApplicationController
 
     # sanitize search parameters, consider implementing the ransackable methods
     def market_food_inventory_search_params
-      params[:q].assert_valid_keys('s', 'item_name_cont', 'quantity_cont', 'updated_at_cont') unless params[:q].blank?
+      params[:q].assert_valid_keys('s', 'item_name_cont', 'quantity_cont') unless params[:q].blank?
       params[:q]
     end
     

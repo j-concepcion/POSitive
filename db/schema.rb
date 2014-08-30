@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829051305) do
+ActiveRecord::Schema.define(version: 20140830064043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140829051305) do
     t.datetime "updated_at"
     t.date     "order_date"
     t.uuid     "user_id"
+    t.string   "takeout_type"
   end
 
   create_table "products", id: :uuid, default: "uuid_generate_v1()", force: true do |t|

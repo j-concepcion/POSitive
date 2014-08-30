@@ -6,6 +6,8 @@ class OrderSlip < ActiveRecord::Base
 
 	TABLES = ["1", "2", "3", "4", "5", "6", "7"]
 
+	TAKEOUTS = ["Plastic", "Box"]
+
 	validates :order_type, :order_date, presence: true
 
 end

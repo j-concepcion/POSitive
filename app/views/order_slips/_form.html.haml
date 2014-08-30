@@ -5,6 +5,7 @@
     = f.input :order_type, collection: OrderSlip::TYPES, as: :radio_buttons
     = f.input :table_number, collection: OrderSlip::TABLES
     = f.input :takeout_number
+    = f.input :takeout_type, collection: OrderSlip::TAKEOUTS
     = f.input :user_id, collection: User.where(:status => "active").order("first_name asc").all, label_method: "name", label: "Server"
   .col-md-7
     = f.simple_fields_for :order_slip_items do |i|

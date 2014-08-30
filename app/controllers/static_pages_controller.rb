@@ -3,4 +3,10 @@ class StaticPagesController < ApplicationController
 	
   def inventory
   end
+
+  def table
+  end
+
+  def takeout
+  end
 end

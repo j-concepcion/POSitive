@@ -16,9 +16,6 @@
         .form-group
           = f.label :quantity_cont, class: 'sr-only'
           = f.input_field :quantity_cont, as: 'string', placeholder: 'Quantity'
-        .form-group
-          = f.label :updated_at_cont, class: 'sr-only'
-          = f.input_field :updated_at_cont, as: 'string', placeholder: 'Date'
         = button_tag class: 'btn btn-default' do
           %span.glyphicon.glyphicon-search
         = link_to 'Clear', request.path
@@ -26,13 +23,11 @@
       %tr
         %th= sort_link(@q, :item_name)
         %th= sort_link(@q, :quantity)
-        %th= sort_link(@q, :updated_at)
         %th
       - @market_food_inventories.each do |market_food_inventory|
         %tr
           %td= market_food_inventory.item_name
           %td= market_food_inventory.quantity
-          %td= market_food_inventory.updated_at
           %td
             .btn-group.btn-group-xs
               = link_to market_food_inventory, class: 'btn btn-primary' do

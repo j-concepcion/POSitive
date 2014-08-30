@@ -7,18 +7,14 @@
           %span.glyphicon.glyphicon-edit
         = link_to products_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Products index" do
           %span.glyphicon.glyphicon-list
-.row
-  .col-md-2
-    <strong>Item name:</strong>
-  .col-md-10
-    = @product.item_name
-.row
-  .col-md-2
-    <strong>Category:</strong>
-  .col-md-10
-    = @product.category
-.row
-  .col-md-2
-    <strong>Price:</strong>
-  .col-md-10
-    = @product.price
+
+    %table.table.table-striped.table-condensed
+      %tr
+        %th Item Name:
+        %td= @product.item_name
+      %tr
+        %th Category:
+        %td= @product.category
+      %tr
+        %th Price:
+        %td= number_with_precision(@product.price, precision: 2)

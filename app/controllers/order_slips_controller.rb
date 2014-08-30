@@ -61,13 +61,13 @@ class OrderSlipsController < ApplicationController
  
     # Only allow a trusted parameter "white list" through.
     def order_slip_params
-      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :order_date, :user_id,
+      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :takeout_type, :order_date, :user_id,
         order_slip_items_attributes: [:id, :product_id, :quantity, :_destroy])
     end
 
     # sanitize search parameters, consider implementing the ransackable methods
     def order_slip_search_params
-      params[:q].assert_valid_keys('s', 'order_type_cont', 'table_number_cont', 'takeout_number_cont', 'user_id_cont') unless params[:q].blank?
+      params[:q].assert_valid_keys('s', 'order_type_cont', 'table_number_cont', 'takeout_number_cont', 'takeout_type_cont', 'user_id_cont') unless params[:q].blank?
       params[:q]
     end
     

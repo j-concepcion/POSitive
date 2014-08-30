@@ -7,50 +7,57 @@
           %span.glyphicon.glyphicon-edit
         = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
           %span.glyphicon.glyphicon-list
-.row
-  .col-md-2
-    <strong>Date:</strong>
-  .col-md-10
-    = @order_slip.order_date
-.row
-  .col-md-2
-    <strong>Order type:</strong>
-  .col-md-10
-    = @order_slip.order_type
--unless @order_slip.table_number.nil?
-  .row
-    .col-md-2
-      <strong>Table number:</strong>
-    .col-md-10
-      = @order_slip.table_number
-- unless @order_slip.takeout_number.nil?
-  .row
-    .col-md-2
-      <strong>Takeout number:</strong>
-    .col-md-10
-      = @order_slip.takeout_number
-.row
-  .col-md-2
-    <strong>Server:</strong>
-  .col-md-10
-    = User.find(@order_slip.user_id).name
+
+    %table.table.table-striped.table-condensed
+      %tr
+        %th Date:
+        %td= @order_slip.order_date.strftime("%d %b %y")
+      %tr
+        %th Order Type:
+        %td= @order_slip.order_type
+      -unless @order_slip.table_number.nil?
+        %tr
+          %th Table Number:
+          %td= @order_slip.table_number
+      - unless @order_slip.takeout_number.nil?
+        %tr
+          %th Takeout Number:
+          %td= @order_slip.takeout_number
+        %tr
+          %th Takeout Type:
+          %td= @order_slip.takeout_type
+      %tr
+        %th Server:
+        %td= User.find(@order_slip.user_id).name    
 
 - @total = 0
 .row
   .col-md-12
-    %table.table-striped
-      %tr
-        %th Name
-        %th Quantity
-        %th Item Price
-        %th Total Price
-      - @order_slip.order_slip_items.each do |i|
+    .panel.panel-default
+      .panel-heading Item Details
+      %table.table.table-striped.table-condensed
         %tr
-          %td= Product.find(i.product_id).item_name
-          %td= i.quantity
-          %td= Product.find(i.product_id).price
-          - @per_item = (i.quantity * Product.find(i.product_id).price)
-          %td= @per_item
-          - @total = @total + @per_item
-      %tr
-        %td= @total
+          %th Name
+          %th Quantity
+          %th Item Price
+          %th Total Price
+        - @order_slip.order_slip_items.each do |i|
+          %tr
+            %td= Product.find(i.product_id).item_name
+            %td= i.quantity
+            %td= number_with_precision(Product.find(i.product_id).price, precision: 2)
+            - @per_item = (i.quantity * Product.find(i.product_id).price)
+            %td= number_with_precision(@per_item, precision: 2)
+            - @total = @total + @per_item
+        - if (@order_slip.takeout_type == "Box")
+          %tr
+            %td Takeout Box:
+            %td
+            %td
+            %td 5.00
+            -@total = @total + 5
+        %tr
+          %td Total:
+          %td
+          %td
+          %td= number_with_precision(@total, precision: 2)

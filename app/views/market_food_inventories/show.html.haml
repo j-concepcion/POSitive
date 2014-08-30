@@ -7,18 +7,11 @@
           %span.glyphicon.glyphicon-edit
         = link_to market_food_inventories_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Market Food Inventories index" do
           %span.glyphicon.glyphicon-list
-.row
-  .col-md-2
-    <strong>Item name:</strong>
-  .col-md-10
-    = @market_food_inventory.item_name
-.row
-  .col-md-2
-    <strong>Quantity:</strong>
-  .col-md-10
-    = @market_food_inventory.quantity
-.row
-  .col-md-2
-    <strong>Date:</strong>
-  .col-md-10
-    = @market_food_inventory.updated_at
+
+    %table.table.table-striped.table-condensed
+      %tr
+        %th Item Name
+        %td= @market_food_inventory.item_name
+      %tr
+        %th Quantity:
+        %td= @market_food_inventory.quantity
