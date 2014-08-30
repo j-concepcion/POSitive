@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830064043) do
+ActiveRecord::Schema.define(version: 20140830135131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,9 +35,10 @@ ActiveRecord::Schema.define(version: 20140830064043) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "market_food_inventories", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
+  create_table "inventories", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.string   "item_name"
     t.integer  "quantity"
+    t.string   "inventory_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140830064043) do
     t.date     "order_date"
     t.uuid     "user_id"
     t.string   "takeout_type"
+    t.boolean  "open",           default: true
   end
 
   create_table "products", id: :uuid, default: "uuid_generate_v1()", force: true do |t|

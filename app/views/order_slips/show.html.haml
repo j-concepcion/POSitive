@@ -7,6 +7,9 @@
           %span.glyphicon.glyphicon-edit
         = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
           %span.glyphicon.glyphicon-list
+        = link_to split_order_slip_path(@order_slip), class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
+          %span.glyphicon.glyphicon-minus-sign
+          Split
 
     %table.table.table-striped.table-condensed
       %tr
@@ -37,12 +40,14 @@
       .panel-heading Item Details
       %table.table.table-striped.table-condensed
         %tr
+          %th
           %th Name
           %th Quantity
           %th Item Price
           %th Total Price
         - @order_slip.order_slip_items.each do |i|
           %tr
+            %td= i.created_at.strftime("%I:%M %p")
             %td= Product.find(i.product_id).item_name
             %td= i.quantity
             %td= number_with_precision(Product.find(i.product_id).price, precision: 2)
@@ -61,3 +66,21 @@
           %td
           %td
           %td= number_with_precision(@total, precision: 2)
+
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading Merge with:
+      %table.table.table-condensed
+        %tr
+          %th
+          %th Order Type
+          %th Table / Takeout Number
+        - OrderSlip.where.not(id: @order_slip.id).each do |tab|
+          -if tab.open?
+            %tr
+              %td
+                = link_to merge_order_slip_path(:another_id=>tab.id), :method => :post, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Merge" do
+                  %span.glyphicon.glyphicon-plus-sign            
+              %td= tab.order_type
+              %td= tab.table_number or tab.takeout_number

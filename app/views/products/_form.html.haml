@@ -1,7 +1,7 @@
 = simple_form_for @product, html:{class: 'form-horizontal', role: 'form'} do |f|
   = form_error_notification(f)
   = f.input :item_name
-  = f.input :category
+  = f.input :category, collection: Product::CATEGORIES
   = f.input :price
   .form-group
     .col-sm-offset-2.col-sm-10

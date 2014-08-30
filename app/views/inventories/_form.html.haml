@@ -1,7 +1,8 @@
-= simple_form_for @market_food_inventory, html:{class: 'form-horizontal', role: 'form'} do |f|
+= simple_form_for @inventory, html:{class: 'form-horizontal', role: 'form'} do |f|
   = form_error_notification(f)
   = f.input :item_name
   = f.input :quantity
+  = f.input :inventory_type, collection: Inventory::TYPES
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.button :submit

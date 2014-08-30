@@ -23,6 +23,14 @@ class OrderSlipItemsController < ApplicationController
   # POST /order_slip_items
   def create
     if @order_slip_item.save
+      product = Product.find(@order_slip_item.product_id)
+      prod_item = product.item_name
+      if (product.category == "Silog")
+        prod_item.slice!("silog")
+      end
+      inv_item = Inventory.find_by_item_name(prod_item)
+      inv_item.quantity = inv_item.quantity - @order_slip_item.quantity
+        inv_item.update_attribute(:quantity, inv_item.quantity)
       redirect_to @order_slip_item, notice: 'Order slip item was successfully created.'
     else
       render :new
@@ -31,6 +39,14 @@ class OrderSlipItemsController < ApplicationController
 
   # PATCH/PUT /order_slip_items/1
   def update
+      product = Product.find(@order_slip_item.product_id)
+      prod_item = product.item_name
+      if (product.category == "Silog")
+        prod_item.slice!("silog")
+      end
+      inv_item = Inventory.find_by_item_name(prod_item)
+      inv_item.quantity = inv_item.quantity + @order_slip_item.quantity
+      inv_item.update_attribute(:quantity, inv_item.quantity)
     if @order_slip_item.update(order_slip_item_params)
       redirect_to @order_slip_item, notice: 'Order slip item was successfully updated.'
     else

@@ -27,8 +27,12 @@ class OrderSlipsController < ApplicationController
   def create
     if @order_slip.save
       @order_slip.order_slip_items.each do |osi|
-        product = Product.find(osi.product_id).item_name
-        inv_item = MarketFoodInventory.find_by_item_name(product)
+        product = Product.find(osi.product_id)
+        prod_item = product.item_name
+        if (product.category == "Silog")
+          prod_item.slice!("silog")
+        end
+        inv_item = Inventory.find_by_item_name(prod_item)
         inv_item.quantity = inv_item.quantity - osi.quantity
         inv_item.update_attribute(:quantity, inv_item.quantity)
       end
@@ -49,8 +53,37 @@ class OrderSlipsController < ApplicationController
 
   # DELETE /order_slips/1
   def destroy
+    @order_slip.order_slip_items.each do |osi|
+        product = Product.find(osi.product_id)
+        prod_item = product.item_name
+        if (product.category == "Silog")
+          prod_item.slice!("silog")
+        end
+        inv_item = Inventory.find_by_item_name(prod_item)
+        inv_item.quantity = inv_item.quantity + osi.quantity
+        inv_item.update_attribute(:quantity, inv_item.quantity)
+    end
     @order_slip.destroy
     redirect_to order_slips_url, notice: 'Order slip was successfully destroyed.'
+  end
+
+  def archive
+    @order_slip.update_attribute(:displayed, false)
+    redirect_to order_slips_url, notice: 'Order slip was successfully closed.'
+  end
+
+  def split
+    @order_slip = OrderSlip.find(params[:id])
+  end
+
+  def merge
+    @order_slip = OrderSlip.find(params[:id])
+    tab = OrderSlip.find(params[:another_id])
+    tab.order_slip_items.each do |i|
+      @order_slip.order_slip_items.create(:quantity=>i.quantity, :order_slip_id=>@order_slip.id, :product_id=>i.product_id)
+    end
+    tab.destroy
+    redirect_to @order_slip, notice: 'Order slips were successfully merged.'
   end
 
   private
@@ -61,13 +94,13 @@ class OrderSlipsController < ApplicationController
  
     # Only allow a trusted parameter "white list" through.
     def order_slip_params
-      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :takeout_type, :order_date, :user_id,
+      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :takeout_type, :order_date, :user_id, :open,
         order_slip_items_attributes: [:id, :product_id, :quantity, :_destroy])
     end
 
     # sanitize search parameters, consider implementing the ransackable methods
     def order_slip_search_params
-      params[:q].assert_valid_keys('s', 'order_type_cont', 'table_number_cont', 'takeout_number_cont', 'takeout_type_cont', 'user_id_cont') unless params[:q].blank?
+      params[:q].assert_valid_keys('s', 'order_type_cont', 'table_number_cont', 'takeout_number_cont', 'takeout_type_cont', 'user_id_cont', 'open') unless params[:q].blank?
       params[:q]
     end
     

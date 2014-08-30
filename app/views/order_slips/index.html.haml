@@ -5,6 +5,8 @@
         Order Slips Index
         = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add order_slip" do
           %span.glyphicon.glyphicon-plus
+        = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add order_slip" do
+          %span.glyphicon.glyphicon-plus
 .row
   .col-md-12
     .well
@@ -30,6 +32,7 @@
         = link_to 'Clear', request.path
     %table.table.table-condensed.table-hover
       %tr
+        %th Status
         %th= sort_link(@q, :order_type)
         %th= sort_link(@q, :table_number)
         %th= sort_link(@q, :takeout_number)
@@ -38,6 +41,10 @@
         %th
       - @order_slips.each do |order_slip|
         %tr
+          -if order_slip.open?
+            %td Open
+          - else
+            %td Closed 
           %td= order_slip.order_type
           %td= order_slip.table_number
           %td= order_slip.takeout_number
@@ -57,7 +64,14 @@
                     %span.glyphicon.glyphicon-edit
                     Edit
                 %li
-                  = link_to order_slip, :method => :delete, :data => { :confirm => 'Are you sure?' } do
-                    %span.glyphicon.glyphicon-trash
-                    Destroy
+                  = link_to archive_order_slip_path(order_slip) do
+                    %span.glyphicon.glyphicon-check
+                    Close
+                - if (order_slip.open?)
+                  %li.divider
+                  %li
+                    = link_to order_slip, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                      %span.glyphicon.glyphicon-trash
+                      Cancel
+
     = paginate @order_slips, theme: 'twitter-bootstrap-3', pagination_class: "pagination-sm"

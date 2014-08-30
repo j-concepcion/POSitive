@@ -1,0 +1,9 @@
+.row
+  .col-md-12
+    %h1
+      New inventory
+      = link_to inventories_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Inventories index" do
+        %span.glyphicon.glyphicon-list
+.row
+  .col-md-12
+    = render 'form'

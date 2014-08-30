@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  resources :market_food_inventories
-
   get 'static_pages/inventory'
   get 'static_pages/table'
   get 'static_pages/takeout'
 
-  resources :order_slip_items
-
-  resources :order_slips
   resources :products
+  resources :inventories
+  resources :order_slip_items
+  resources :order_slips do
+    member do
+      get :split
+      post :archive
+      post :merge
+    end
+
+  end
 
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   resources :users do
