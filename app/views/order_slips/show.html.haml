@@ -7,9 +7,6 @@
           %span.glyphicon.glyphicon-edit
         = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
           %span.glyphicon.glyphicon-list
-        = link_to split_order_slip_path(@order_slip), class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
-          %span.glyphicon.glyphicon-minus-sign
-          Split
 
     %table.table.table-striped.table-condensed
       %tr
@@ -33,39 +30,50 @@
         %th Server:
         %td= User.find(@order_slip.user_id).name    
 
-- @total = 0
-.row
-  .col-md-12
-    .panel.panel-default
-      .panel-heading Item Details
-      %table.table.table-striped.table-condensed
-        %tr
-          %th
-          %th Name
-          %th Quantity
-          %th Item Price
-          %th Total Price
-        - @order_slip.order_slip_items.each do |i|
-          %tr
-            %td= i.created_at.strftime("%I:%M %p")
-            %td= Product.find(i.product_id).item_name
-            %td= i.quantity
-            %td= number_with_precision(Product.find(i.product_id).price, precision: 2)
-            - @per_item = (i.quantity * Product.find(i.product_id).price)
-            %td= number_with_precision(@per_item, precision: 2)
-            - @total = @total + @per_item
-        - if (@order_slip.takeout_type == "Box")
-          %tr
-            %td Takeout Box:
-            %td
-            %td
-            %td 5.00
-            -@total = @total + 5
-        %tr
-          %td Total:
-          %td
-          %td
-          %td= number_with_precision(@total, precision: 2)
+  - @total = 0
+  .row
+    .col-md-12
+      = form_tag split_order_slip_path(@order_slip) do
+        .panel.panel-default
+          .panel-heading Item Details
+          %table.table.table-striped.table-condensed
+            %tr
+              %td
+              %th Timestamp
+              %th Name
+              %th Quantity
+              %th Item Price
+              %th Total Price
+            - @order_slip.order_slip_items.each do |i|
+              %tr
+                %td= check_box_tag "selected[]", i.id
+                %td= i.created_at.strftime("%I:%M %p")
+                %td= Product.find(i.product_id).item_name
+                %td= i.quantity
+                %td= number_with_precision(Product.find(i.product_id).price, precision: 2)
+                - @per_item = (i.quantity * Product.find(i.product_id).price)
+                %td= number_with_precision(@per_item, precision: 2)
+                - @total = @total + @per_item
+            - if (@order_slip.takeout_type == "Box")
+              %tr
+                %td Takeout Box:
+                %td
+                %td
+                %td
+                %td
+                %td 5.00
+                -@total = @total + 5
+            %tr
+              %td Total:
+              %td
+              %td
+              %td
+              %td
+              %td= number_with_precision(@total, precision: 2)
+            %tr
+              %td
+                = submit_tag 'Split', class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Split"
+
 
 .row
   .col-md-12

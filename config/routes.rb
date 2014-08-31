@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :order_slip_items
   resources :order_slips do
     member do
-      get :split
+      post :split
       post :archive
       post :merge
     end
