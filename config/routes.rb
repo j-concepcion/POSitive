@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'static_pages/inventory'
+  get 'static_pages/sales'
   get 'static_pages/table'
   get 'static_pages/takeout'
 
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post :split
       post :archive
       post :merge
+      post :activate
     end
 
   end

@@ -9,5 +9,7 @@ class OrderSlip < ActiveRecord::Base
 	TAKEOUTS = ["Plastic", "Box"]
 
 	validates :order_type, :order_date, presence: true
+	validates :table_number, uniqueness: true, if: Proc.new {|order_slip| order_slip.open? and order_slip.order_type=="Dine-In"}
+	validates :takeout_number, uniqueness: true, if: Proc.new {|order_slip| order_slip.open? and order_slip.order_type=="Takeout"}
 
 end

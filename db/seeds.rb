@@ -111,7 +111,7 @@ Product.create(
     item_name: 'Chicken-Pork Adobo',
     category: 'Rice Topping',
     price: '55'}, {
-    item_name: 'Pork Asad',
+    item_name: 'Pork Asado',
     category: 'Rice Topping',
     price: '55'}, {
     item_name: 'Sweet & Sour Pork',
@@ -231,7 +231,7 @@ Product.create(
     item_name: 'French Fries (Jr)',
     category: 'Classic',
     price: '45'}, {
-    item_name: 'Sizzling Prok Steak',
+    item_name: 'Sizzling Pork Steak',
     category: 'Classic',
     price: '135'}, {
     item_name: 'Chicken Wings',
@@ -267,7 +267,10 @@ Product.create(
     item_name: 'San Mig Light',
     category: 'Drink',
     price: '40'}, {
-    item_name: 'Antonov',
+    item_name: 'Antonov (Ice)',
+    category: 'Drink',
+    price: '40'}, {
+    item_name: 'Antonov (Apple)',
     category: 'Drink',
     price: '40'}, {
     item_name: 'Red Horse',
@@ -288,7 +291,7 @@ Product.create(
     item_name: 'Coke (In Can)',
     category: 'Drink',
     price: '30'}, {
-    item_name: 'Mug Rootbear (In Can)',
+    item_name: 'Mug Rootbeer (In Can)',
     category: 'Drink',
     price: '30'}, {
     item_name: 'Pineapple Juice',
@@ -300,7 +303,10 @@ Product.create(
     item_name: 'Mango Juice',
     category: 'Drink',
     price: '45'}, {
-    item_name: 'Bottle Water',
+    item_name: 'Four-Seasons Juice',
+    category: 'Drink',
+    price: '30'}, {
+    item_name: 'Bottled Water',
     category: 'Drink',
     price: '15'}, {
     item_name: 'Coffee (3-in-1)',
@@ -311,4 +317,408 @@ Product.create(
     price: '300'}, {
     item_name: 'Rum Coke',
     category: 'Drink',
-    price: '220'}])
+    price: '220'}, {
+    item_name: 'Malboro Lights (20s)',
+    category: 'Cigarettes',
+    price: '70'}, {
+    item_name: 'Malboro Lights (10s)',
+    category: 'Cigarettes',
+    price: '40'}, {
+    item_name: 'Malboro Black (20s)',
+    category: 'Cigarettes',
+    price: '70'}, {
+    item_name: 'Malboro Black (10s)',
+    category: 'Cigarettes',
+    price: '40'}, {
+    item_name: 'Malboro Menthol (20s)',
+    category: 'Cigarettes',
+    price: '70'}, {
+    item_name: 'Malboro Menthol (10s)',
+    category: 'Cigarettes',
+    price: '40'}, {
+    item_name: 'Malboro Red (20s)',
+    category: 'Cigarettes',
+    price: '70'}, {
+    item_name: 'Malboro Red (10s)',
+    category: 'Cigarettes',
+    price: '40'}, {
+    item_name: 'Winston Red (10s)',
+    category: 'Cigarettes',
+    price: '70'}])
+
+##########################################################
+# INVENTORY
+##########################################################
+Inventory.create([{
+    item_name: 'Coke (In Can)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Mountain Dew (In Can)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Mug Rootbeer (In Can)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Mango Juice',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Pineapple Juice',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Orange Juice',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Four-Seasons Juice',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Bottled Water',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Antonov (Ice)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Antonov (Apple)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Red Horse',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'San Mig Light',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Pale Pilsen',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Tanduay Rum',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Antonov (Ice)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Lights (20s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Lights (10s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Black (20s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Black (10s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Menthol (20s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Menthol (10s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Red (20s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Malboro Red (10s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Winston Red (20s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Winston Red (10s)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Bar Stocks"
+    }, {
+    item_name: 'Cheesy Potato',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'French Fries',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Cheese Sticks',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Chicken Wings',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Grilled Liempo',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Sizzling Pork Steak',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Nachos',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Sizzling Hungarian Sausage',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Corn',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Capri',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Spam',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Sausage',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Garlic Mushroom',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Tuna',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Nuts',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Cheese Squeeze',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Quick Melt',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Coffee(3-in-1)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Sunquick (Orange)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Sunquick (Lime)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Catsup',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Mayo Dip',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Seasoning',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Oyster Sauce',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Vinegar',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Soy Sauce',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Pinesol',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Dazz',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Zonrox',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Powder',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Bar',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Trash Bag (Small)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Trash Bag (Large)',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Air Freshener',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Baygon',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Alcohol',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Tissue Roll',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Order Slip',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Groceries"
+    }, {
+    item_name: 'Bacon',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Bologna',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Chix',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Cornedbeef',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Embo',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Hot',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Liempo',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Long',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Pork',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Tap',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'To',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Sisig',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Tokwa\'t Baboy',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Dynamite',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Lumpiang Shanghai',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Sisig Roll',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Pansit Canton',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Pansit Bihon',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Lomi',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Spaghetti',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Chicken-Pork Adobo',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Pork Asado',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Braised Beef',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Sweet & Sour Pork',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Dinuguan',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Ham',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Cheese',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Salted Egg',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Leche Flan',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }, {
+    item_name: 'Gravy',
+    quantity: (rand(5..50)).to_i,
+    inventory_type: "Market Food Items"
+    }])

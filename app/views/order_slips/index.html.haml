@@ -61,10 +61,11 @@
                   = link_to edit_order_slip_path(order_slip) do
                     %span.glyphicon.glyphicon-edit
                     Edit
-                %li
-                  = link_to archive_order_slip_path(order_slip) do
-                    %span.glyphicon.glyphicon-check
-                    Close
+                -#- if (order_slip.open?)    
+                -#  %li
+                -#    = link_to archive_order_slip_path(order_slip) do
+                -#      %span.glyphicon.glyphicon-check
+                -#      Close  
                 - if (order_slip.open?)
                   %li.divider
                   %li

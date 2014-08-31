@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830180742) do
+ActiveRecord::Schema.define(version: 20140830135131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20140830180742) do
 
   create_table "order_slips", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.string   "order_type"
-    t.integer  "table_number"
-    t.integer  "takeout_number"
+    t.string   "table_number"
+    t.string   "takeout_number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "order_date"

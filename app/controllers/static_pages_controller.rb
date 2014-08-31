@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController	
 	skip_authorization_check
 	# authorize_resource :class => false
-  def inventory
+  def sales
   end
 
   def table

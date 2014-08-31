@@ -67,10 +67,15 @@ class OrderSlipsController < ApplicationController
     redirect_to order_slips_url, notice: 'Order slip was successfully destroyed.'
   end
 
-  def archive
-    @order_slip.update_attribute(:displayed, false)
-    redirect_to order_slips_url, notice: 'Order slip was successfully closed.'
-  end
+  # def archive
+  #   @order_slip.update_attribute(:open, false)
+  #   redirect_to order_slips_url, notice: 'Order slip was successfully closed.'
+  # end
+
+  # def activate
+  #   @order_slip.update_attribute(:open, true)
+  #   redirect_to order_slips_url, notice: 'Order slip was successfully opened.'
+  # end
 
   def split
     @order_slip = OrderSlip.find(params[:id])

@@ -1,0 +1,23 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Sales
+
+%table.table.table-condensed.table-hover
+  %tr
+    %th Date
+    %td= Date.today
+  %tr
+    %th Specials
+    %th Quantity
+  - Product.where(:category=>"Special").each do |prod|
+    - @item_qty = 0
+    %tr
+      %td= prod.item_name
+      - OrderSlip.where(:order_date=>Date.today.strftime("%d %b %y"), :open => false).each do |tab|
+        - tab.order_slip_items.each do |tab_item|
+          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+            - @item_qty = @item_qty + tab_item.quantity
+      %td= @item_qty
+
+ 
