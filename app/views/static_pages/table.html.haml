@@ -3,17 +3,24 @@
     .page-header
       %h1
         Dine-In
-        = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add order_slip" do
+        = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add Order Slip" do
           %span.glyphicon.glyphicon-plus
     %table.table.table-condensed.table-bordered
       %tr
-        %td= link_to image_tag('t4 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("4")
-        %td= link_to image_tag('t6 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("5")
+        %td= link_to image_tag('t4 copy.png', width: '100', height: '100'), static_pages_four_path
+        %td= link_to image_tag('t5 copy.png', width: '100', height: '100'), static_pages_five_path
+      //   %td= link_to image_tag('t4 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '4')
+      //   %td= link_to image_tag('t5 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '5')
       %tr  
-        %td= link_to image_tag('t3 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("3")
-        %td= link_to image_tag('t6 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("6")
+        %td= link_to image_tag('t3 copy.png', width: '100', height: '100'), static_pages_three_path
+        %td= link_to image_tag('t6 copy.png', width: '100', height: '100'), static_pages_six_path
+      //   %td= link_to image_tag('t3 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '3')
+      //   %td= link_to image_tag('t6 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '6')
       %tr
-        %td= link_to image_tag('t2 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("2")
-        %td= link_to image_tag('t7 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("7")
+        %td= link_to image_tag('t2 copy.png', width: '100', height: '100'), static_pages_two_path
+        %td= link_to image_tag('t7 copy.png', width: '100', height: '100'), static_pages_seven_path
+      //   %td= link_to image_tag('t2 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '2')
+      //   %td= link_to image_tag('t7 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '7')
       %tr
-        %td= link_to image_tag('t1 copy.png', width: '100', height: '100'), OrderSlip.find_by_table_number("1")
+        %td= link_to image_tag('t1 copy.png', width: '100', height: '100'), static_pages_one_path
+      //   %td= link_to image_tag('t1 copy.png', width: '100', height: '100'), OrderSlip.where('table_number LIKE ?', '1')

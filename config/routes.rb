@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   get 'static_pages/sales'
   get 'static_pages/table'
   get 'static_pages/takeout'
+  get 'static_pages/one'
+  get 'static_pages/two'
+  get 'static_pages/three'
+  get 'static_pages/four'
+  get 'static_pages/five'
+  get 'static_pages/six'
+  get 'static_pages/seven'
 
   resources :products
   resources :inventories

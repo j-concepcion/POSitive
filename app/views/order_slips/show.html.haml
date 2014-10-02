@@ -2,7 +2,14 @@
   .col-md-12
     .page-header
       %h1
-        Order Slip Detail
+        -unless @order_slip.table_number.nil?
+          %tr
+            %th Table Number:
+            %td= @order_slip.table_number
+        - unless @order_slip.takeout_number.nil?
+          %tr
+            %th Takeout Number:
+            %td= @order_slip.takeout_number
         = link_to edit_order_slip_path(@order_slip), class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Edit order_slip" do
           %span.glyphicon.glyphicon-edit
         = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
@@ -21,17 +28,6 @@
       %tr
         %th Order Type:
         %td= @order_slip.order_type
-      -unless @order_slip.table_number.empty?
-        %tr
-          %th Table Number:
-          %td= @order_slip.table_number
-      - unless @order_slip.takeout_number.empty?
-        %tr
-          %th Takeout Number:
-          %td= @order_slip.takeout_number
-        %tr
-          %th Takeout Type:
-          %td= @order_slip.takeout_type
       %tr
         %th Server:
         %td= User.find(@order_slip.user_id).name

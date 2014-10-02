@@ -1,0 +1,57 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Table 7
+        = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add order_slip" do
+          %span.glyphicon.glyphicon-plus
+        = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
+          %span.glyphicon.glyphicon-list
+
+  .row
+    .col-md-12
+      - OrderSlip.all.each do |slip|
+        %table.table.table-striped.table-condensed
+          - if slip.table_number.starts_with? '7'
+            %tr
+              %th Date:
+              %td= slip.order_date.strftime("%d %b %y")
+            %tr
+              %th Order Type:
+              %td= slip.order_type
+            %tr
+              %th Server:
+              %td= User.find(slip.user_id).name 
+            - @total = 0
+            .panel.panel-default
+              .panel-heading Item Details
+              %table.table.table-striped.table-condensed
+                %tr
+                  %th Timestamp
+                  %th Name
+                  %th Quantity
+                  %th Item Price
+                  %th Total Price
+                - slip.order_slip_items.each do |i|
+                  %tr
+                    %td= i.created_at.strftime("%I:%M %p")
+                    %td= Product.find(i.product_id).item_name
+                    %td= i.quantity
+                    %td= number_with_precision(Product.find(i.product_id).price, precision: 2)
+                    - @per_item = (i.quantity * Product.find(i.product_id).price)
+                    %td= number_with_precision(@per_item, precision: 2)
+                    - @total = @total + @per_item
+                - if (slip.takeout_type == "Box")
+                  %tr
+                    %td Takeout Box:
+                    %td
+                    %td
+                    %td
+                    %td 5.00
+                    -@total = @total + 5
+                %tr
+                  %td Total:
+                  %td
+                  %td
+                  %td
+                  %td= number_with_precision(@total, precision: 2)

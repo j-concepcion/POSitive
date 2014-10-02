@@ -78,12 +78,22 @@ class OrderSlipsController < ApplicationController
   # end
 
   def split
+    letters = ('A'..'Z').to_a
     @order_slip = OrderSlip.find(params[:id])
-    @new_os = OrderSlip.create!(:order_date=>@order_slip.order_date, :order_type=>@order_slip.order_type, :table_number=>10, :user_id=>@order_slip.user_id, :open=> @order_slip.open)
-    params[:selected].each do |i|
-      @new_os.order_slip_items << OrderSlipItem.find(i)
+    if @order_slip.takeout_number.nil?
+      @new_os = OrderSlip.create!(:order_date=>@order_slip.order_date, :order_type=>@order_slip.order_type, :table_number=>@order_slip.table_number+letters.shift, :user_id=>@order_slip.user_id, :open=> @order_slip.open)
+      params[:selected].each do |i|
+        @new_os.order_slip_items << OrderSlipItem.find(i)
+      end
+      @new_os.save!
+    elsif @order_slip.table_number.nil?
+      @new_os = OrderSlip.create!(:order_date=>@order_slip.order_date, :order_type=>@order_slip.order_type, :takeout_number=>@order_slip.takeout_number+letters.shift, :user_id=>@order_slip.user_id, :open=> @order_slip.open)
+      params[:selected].each do |i|
+        @new_os.order_slip_items << OrderSlipItem.find(i)
+      end
+      @new_os.save!
     end
-    @new_os.save!
+    
     redirect_to @new_os, notice: 'Order slip was successfully split.'
   end
 
