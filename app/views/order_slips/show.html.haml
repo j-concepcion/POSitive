@@ -14,17 +14,17 @@
           %span.glyphicon.glyphicon-edit
         = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
           %span.glyphicon.glyphicon-list
-        -# - if (@order_slip.open?)    
-        -#  = link_to archive_order_slip_path(@order_slip), class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Close" do
-        -#    %span.glyphicon.glyphicon-folder-close
-        -#- if !(@order_slip.open?)    
-        -#  = link_to activate_order_slip_path(@order_slip), class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Open" do
-        -#    %span.glyphicon.glyphicon-folder-open
+        - if @order_slip.open?
+          = link_to archive_order_slip_path(@order_slip), class: "btn btn-danger", "data-toggle" => "tooltip", "data-placement" => "top", title: "Close" do
+            Close
+        - if !(@order_slip.open?)    
+          = link_to activate_order_slip_path(@order_slip), class: "btn btn-success", "data-toggle" => "tooltip", "data-placement" => "top", title: "Open" do
+            Open
 
     %table.table.table-striped.table-condensed
       %tr
         %th Date:
-        %td= @order_slip.order_date.strftime("%d %b %y")
+        %td= @order_slip.created_at.strftime("%d %b %y")
       %tr
         %th Order Type:
         %td= @order_slip.order_type
@@ -46,7 +46,8 @@
           .panel-heading Item Details
           %table.table.table-striped.table-condensed
             %tr
-              %td
+              - if @order_slip.open?
+                %td
               %th Timestamp
               %th Name
               %th Quantity
@@ -54,7 +55,8 @@
               %th Total Price
             - @order_slip.order_slip_items.each do |i|
               %tr
-                %td= check_box_tag "selected[]", i.id
+                - if @order_slip.open?
+                  %td= check_box_tag "selected[]", i.id
                 %td= i.created_at.strftime("%I:%M %p")
                 %td= Product.find(i.product_id).item_name
                 %td= i.quantity
@@ -65,7 +67,8 @@
             - if (@order_slip.takeout_type == "Box")
               %tr
                 %td Takeout Box:
-                %td
+                - if @order_slip.open?
+                  %td
                 %td
                 %td
                 %td
@@ -73,33 +76,37 @@
                 -@total = @total + 5
             %tr
               %td Total:
-              %td
+              - if @order_slip.open?
+                %td
               %td
               %td
               %td
               %td= number_with_precision(@total, precision: 2)
-            %tr
-              %td
-                = submit_tag 'Split', class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Split"
+            - if @order_slip.open?
+              %tr
+                %td
+                  = submit_tag 'Split', class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Split"
 
 
-.row
-  .col-md-12
-    .panel.panel-default
-      .panel-heading Merge with:
-      %table.table.table-condensed
-        %tr
-          %th
-          %th Order Type
-          %th Table / Takeout Number
-        - OrderSlip.where.not(id: @order_slip.id).each do |tab|
-          -if tab.open?
-            %tr
-              %td
-                = link_to merge_order_slip_path(:another_id=>tab.id), :method => :post, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Merge" do
-                  %span.glyphicon.glyphicon-plus-sign            
-              %td= tab.order_type
-              - if tab.order_type == "Dine-In"
-                %td= tab.table_number
-              - elsif tab.order_type == "Takeout"
-                %td= tab.takeout_number
+- if @order_slip.open?
+
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading Merge with:
+        %table.table.table-condensed
+          %tr
+            %th
+            %th Order Type
+            %th Table / Takeout Number
+          - OrderSlip.where.not(id: @order_slip.id).each do |tab|
+            -if tab.open?
+              %tr
+                %td
+                  = link_to merge_order_slip_path(:another_id=>tab.id), :method => :post, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Merge" do
+                    %span.glyphicon.glyphicon-plus-sign            
+                %td= tab.order_type
+                - if tab.order_type == "Dine-In"
+                  %td= tab.table_number
+                - elsif tab.order_type == "Takeout"
+                  %td= tab.takeout_number

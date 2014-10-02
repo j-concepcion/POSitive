@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'static_pages/sales'
+  get 'static_pages/weekly'
+  get 'static_pages/monthly'
   get 'static_pages/table'
   get 'static_pages/takeout'
   get 'static_pages/one'
@@ -14,11 +16,14 @@ Rails.application.routes.draw do
   resources :inventories
   resources :order_slip_items
   resources :order_slips do
+    collection do
+      get :close
+    end
     member do
       post :split
-      post :archive
+      get :archive
       post :merge
-      post :activate
+      get :activate
     end
 
   end

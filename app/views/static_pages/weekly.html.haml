@@ -1,14 +1,14 @@
 .row
   .col-md-12
     .page-header
-      %h1 Sales
+      %h1 Weekly Sales
 
 %table.table.table-condensed.table-hover
   %tr
-    %th Date
-    %td
-    %td
-    %td= Date.today.strftime("%d %b %y")
+    %th For the week:
+    %td= Time.now.beginning_of_week.strftime("%d %b %y") 
+    %td to
+    %td= Time.now.end_of_week.strftime("%d %b %y") 
   %tr
     %th Specials
     %th Quantity
@@ -19,7 +19,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -38,7 +38,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -57,7 +57,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -76,7 +76,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -95,7 +95,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -114,7 +114,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -133,7 +133,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -152,7 +152,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_day, Time.now.end_of_day).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ?", Time.now.beginning_of_week, Time.now.end_of_week).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
