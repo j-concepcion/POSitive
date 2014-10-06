@@ -62,25 +62,26 @@ class OrderSlipsController < ApplicationController
     redirect_to order_slips_url, notice: 'Order slip was successfully destroyed.'
   end
 
-  # def archive
-  #   @order_slip.update_attribute(:open, false)
-      # @order_slip.order_slip_items.each do |osi|
-      #   product = Product.find(osi.product_id)
-      #   prod_item = product.item_name
-      #   if (product.category == "Silog")
-      #     prod_item.slice!("silog")
-      #   end
-      #   inv_item = Inventory.find_by_item_name(prod_item)
-      #   inv_item.quantity = inv_item.quantity - osi.quantity
-      #   inv_item.update_attribute(:quantity, inv_item.quantity)
-      # end
-  #   redirect_to order_slips_url, notice: 'Order slip was successfully closed.'
-  # end
+  def archive
+    @order_slip.order_slip_items.each do |osi|
+      product = Product.find(osi.product_id)
+      prod_item = product.item_name
+      if (product.category == "Silog")
+        prod_item.slice!("silog")
+      end
+      inv_item = Inventory.find_by_item_name(prod_item)
+      inv_item.quantity = inv_item.quantity - osi.quantity
+      inv_item.update_attribute(:quantity, inv_item.quantity)
+    end
+    @order_slip.update_attribute(:open, false)
 
-  # def activate
-  #   @order_slip.update_attribute(:open, true)
-  #   redirect_to @order_slip, notice: 'Order slip was successfully opened.'
-  # end
+    redirect_to order_slips_url, notice: 'Order slip was successfully closed.'
+  end
+
+  def activate
+    @order_slip.update_attribute(:open, true)
+    redirect_to @order_slip, notice: 'Order slip was successfully opened.'
+  end
 
   def split
     letters = ('A'..'Z').to_a

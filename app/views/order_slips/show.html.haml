@@ -10,9 +10,9 @@
           %tr
             %th Takeout Number:
             %td= @order_slip.takeout_number
-        = link_to edit_order_slip_path(@order_slip), class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Edit order_slip" do
+        = link_to edit_order_slip_path(@order_slip), class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Edit Order Slip" do
           %span.glyphicon.glyphicon-edit
-        = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Order Slips index" do
+        = link_to order_slips_path, class: "btn btn-default btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "All Order Slips" do
           %span.glyphicon.glyphicon-list
         - if @order_slip.open?
           = link_to archive_order_slip_path(@order_slip), class: "btn btn-danger", "data-toggle" => "tooltip", "data-placement" => "top", title: "Close" do

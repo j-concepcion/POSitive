@@ -2,7 +2,7 @@
   .col-md-12
     .page-header
       %h1
-        Inventories Index
+        Inventories
         = link_to new_inventory_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add inventory" do
           %span.glyphicon.glyphicon-plus
 .row
@@ -27,6 +27,9 @@
         %th= sort_link(@q, :item_name)
         %th= sort_link(@q, :quantity)
         %th= sort_link(@q, :inventory_type)
+        - OrderSlip.all.each do |slip|
+          - if (slip.created_at < Date.today and slip.open?)
+            %th For Payment
         %th
       - @inventories.each do |inventory|
         - if (inventory.quantity <= 5)
@@ -34,6 +37,10 @@
             %td= inventory.item_name
             %td= inventory.quantity
             %td= inventory.inventory_type
+            - OrderSlip.where("created_at < ? and open = ?", Date.today, true).each do |open_os|
+              - open_os.order_slip_items.each do |osi|
+                - if (osi.product_id == inventory.id)
+                  %td osi.quantity
             %td
               .btn-group.btn-group-xs
                 = link_to inventory, class: 'btn btn-primary' do
@@ -56,6 +63,10 @@
             %td= inventory.item_name
             %td= inventory.quantity
             %td= inventory.inventory_type
+            - OrderSlip.where("created_at < ? and open = ?", Date.today, true).each do |open_os|
+              - open_os.order_slip_items.each do |osi|
+                - if (osi.product_id == inventory.id)
+                  %td osi.quantity
             %td
               .btn-group.btn-group-xs
                 = link_to inventory, class: 'btn btn-primary' do

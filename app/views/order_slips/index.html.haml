@@ -3,7 +3,7 @@
     .page-header
       %h1
         Order Slips Index
-        = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add order_slip" do
+        = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "New Order Slip" do
           %span.glyphicon.glyphicon-plus
 .row
   .col-md-12
@@ -41,36 +41,34 @@
         %tr
           -if order_slip.open?
             %td Open
-          - else
-            %td Closed 
-          %td= order_slip.order_type
-          %td= order_slip.table_number
-          %td= order_slip.takeout_number
-          %td= order_slip.takeout_type
-          %td= User.find(order_slip.user_id).name
-          %td
-            .btn-group.btn-group-xs
-              = link_to order_slip, class: 'btn btn-primary' do
-                %span.glyphicon.glyphicon-eye-open
-                View              
-              %button.btn.btn-primary.dropdown-toggle{'type' => 'button', 'data-toggle' => 'dropdown'}
-                %span.caret
-                %span.sr-only Toggle Dropdown
-              %ul.dropdown-menu{role: 'menu'}
-                %li
-                  = link_to edit_order_slip_path(order_slip) do
-                    %span.glyphicon.glyphicon-edit
-                    Edit
-                - if (order_slip.open?)    
+            %td= order_slip.order_type
+            %td= order_slip.table_number
+            %td= order_slip.takeout_number
+            %td= order_slip.takeout_type
+            %td= User.find(order_slip.user_id).name
+            %td
+              .btn-group.btn-group-xs
+                = link_to order_slip, class: 'btn btn-primary' do
+                  %span.glyphicon.glyphicon-eye-open
+                  View              
+                %button.btn.btn-primary.dropdown-toggle{'type' => 'button', 'data-toggle' => 'dropdown'}
+                  %span.caret
+                  %span.sr-only Toggle Dropdown
+                %ul.dropdown-menu{role: 'menu'}
                   %li
-                    = link_to archive_order_slip_path(order_slip) do
-                      %span.glyphicon.glyphicon-check
-                      Close  
-                - if (order_slip.open?)
-                  %li.divider
-                  %li
-                    = link_to order_slip, :method => :delete, :data => { :confirm => 'Are you sure?' } do
-                      %span.glyphicon.glyphicon-trash
-                      Cancel
+                    = link_to edit_order_slip_path(order_slip) do
+                      %span.glyphicon.glyphicon-edit
+                      Edit
+                  - if (order_slip.open?)    
+                    %li
+                      = link_to archive_order_slip_path(order_slip) do
+                        %span.glyphicon.glyphicon-check
+                        Close  
+                  - if (order_slip.open?)
+                    %li.divider
+                    %li
+                      = link_to order_slip, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                        %span.glyphicon.glyphicon-trash
+                        Cancel
 
     = paginate @order_slips, theme: 'twitter-bootstrap-3', pagination_class: "pagination-sm"
