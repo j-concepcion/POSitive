@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   match 'sales_report' => 'static_pages#sales_report', :via => [:get]
+  match 'sales_report_create' => 'static_pages#sales_report_create', :via => [:get]
   match 'daily_sales' => 'static_pages#sales', :via => [:get]
   match 'monthly_sales' => 'static_pages#monthly', :via => [:get]
   match 'dine_in' => 'static_pages#table', :via => [:get]

@@ -1,14 +1,15 @@
 .row
   .col-md-12
     .page-header
-      %h1 Monthly Sales
+      %h1 Sales
 
 %table.table.table-condensed.table-hover
   %tr
-    %th For the month of
+    %th Date
     %td
     %td
-    %td= Date.today.strftime("%B")
+    %td= @report_date.strftime("%d %b %y")
+    / %td= Date.today.strftime("%d %b %y")
   %tr
     %th Specials
     %th Quantity
@@ -19,7 +20,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -38,7 +39,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -57,7 +58,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -76,7 +77,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -95,7 +96,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -114,7 +115,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -133,7 +134,7 @@
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity
@@ -148,11 +149,11 @@
     %th 
     %th
     %th
-  - Product.where(:category=>"Ciegarettes").each do |prod|
+  - Product.where(:category=>"Cigarettes").each do |prod|
     - @item_qty = 0
     %tr
       %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_month, Date.today.end_of_month, false).each do |tab|
+      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
         - tab.order_slip_items.each do |tab_item|
           - if (prod.item_name == Product.find(tab_item.product_id).item_name)
             - @item_qty = @item_qty + tab_item.quantity

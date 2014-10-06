@@ -6,7 +6,7 @@
 .row
   .col-md-12
     %table.table.table-condensed.table-hover
-      = form_tag(daily_sales_path, :method=>'get') do
+      = form_tag(sales_report_create_path, :method=>'get') do
         .form-group
           %tr
             %th= label :report_date, "Report Date: "
