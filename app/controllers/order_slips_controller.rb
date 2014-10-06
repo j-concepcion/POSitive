@@ -26,16 +26,6 @@ class OrderSlipsController < ApplicationController
   # POST /order_slips
   def create
     if @order_slip.save
-      @order_slip.order_slip_items.each do |osi|
-        product = Product.find(osi.product_id)
-        prod_item = product.item_name
-        if (product.category == "Silog")
-          prod_item.slice!("silog")
-        end
-        inv_item = Inventory.find_by_item_name(prod_item)
-        inv_item.quantity = inv_item.quantity - osi.quantity
-        inv_item.update_attribute(:quantity, inv_item.quantity)
-      end
       redirect_to @order_slip, notice: 'Order slip was successfully created.'
     else
       render :new
@@ -69,6 +59,16 @@ class OrderSlipsController < ApplicationController
 
   # def archive
   #   @order_slip.update_attribute(:open, false)
+      # @order_slip.order_slip_items.each do |osi|
+      #   product = Product.find(osi.product_id)
+      #   prod_item = product.item_name
+      #   if (product.category == "Silog")
+      #     prod_item.slice!("silog")
+      #   end
+      #   inv_item = Inventory.find_by_item_name(prod_item)
+      #   inv_item.quantity = inv_item.quantity - osi.quantity
+      #   inv_item.update_attribute(:quantity, inv_item.quantity)
+      # end
   #   redirect_to order_slips_url, notice: 'Order slip was successfully closed.'
   # end
 
@@ -80,13 +80,13 @@ class OrderSlipsController < ApplicationController
   def split
     letters = ('A'..'Z').to_a
     @order_slip = OrderSlip.find(params[:id])
-    if @order_slip.takeout_number.nil?
+    if @order_slip.takeout_number.empty?
       @new_os = OrderSlip.create!(:order_date=>@order_slip.order_date, :order_type=>@order_slip.order_type, :table_number=>@order_slip.table_number+letters.shift, :user_id=>@order_slip.user_id, :open=> @order_slip.open)
       params[:selected].each do |i|
         @new_os.order_slip_items << OrderSlipItem.find(i)
       end
       @new_os.save!
-    elsif @order_slip.table_number.nil?
+    elsif @order_slip.table_number.empty?
       @new_os = OrderSlip.create!(:order_date=>@order_slip.order_date, :order_type=>@order_slip.order_type, :takeout_number=>@order_slip.takeout_number+letters.shift, :user_id=>@order_slip.user_id, :open=> @order_slip.open)
       params[:selected].each do |i|
         @new_os.order_slip_items << OrderSlipItem.find(i)

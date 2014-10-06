@@ -1,0 +1,25 @@
+.row
+  .col-md-12
+    .page-header
+      %h1 Sales
+
+.row
+  .col-md-12
+    %table.table.table-condensed.table-hover
+      = form_tag(daily_sales_path, :method=>'get') do
+        .form-group
+          %tr
+            %th= label :report_date, "Report Date: "
+            %td= select_date(date = Date.today, options = {}, html_options = {})
+          %tr
+            %th= label :report_type, "Report Type: "
+          %tr
+            %th= label :daily, "Daily"
+            %td= radio_button_tag "report_type", "daily"
+          %tr
+            %th= label :monthly, "Monthly"
+            %td= radio_button_tag "report_type", "monthly"
+
+        .form-group
+          %tr
+            %td= submit_tag 'Generate Sales Report', class: "btn btn-primary btn-xs"

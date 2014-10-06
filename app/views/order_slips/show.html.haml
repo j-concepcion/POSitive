@@ -24,7 +24,7 @@
     %table.table.table-striped.table-condensed
       %tr
         %th Date:
-        %td= @order_slip.order_date.strftime("%d %b %y")
+        %td= @order_slip.created_at.strftime("%d %b %y")
       %tr
         %th Order Type:
         %td= @order_slip.order_type
