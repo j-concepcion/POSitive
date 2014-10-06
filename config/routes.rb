@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'static_pages/sales_report', to: 'static_pages#sales_report', as: 'sales_report'
-  get 'static_pages/sales', to: 'static_pages#sales', as: 'daily_sales'
-  get 'static_pages/monthly', to: 'static_pages#monthly', as: 'monthly_sales'
-  get 'static_pages/table', to: 'static_pages#table', as: 'dine_in'
-  get 'static_pages/takeout', to: 'static_pages#takeout', as: 'takeout'
-  get 'static_pages/one', to: 'static_pages#one', as: 'table_one'
-  get 'static_pages/two', to: 'static_pages#two', as: 'table_two'
-  get 'static_pages/three', to: 'static_pages#three', as: 'table_three'
-  get 'static_pages/four', to: 'static_pages#four', as: 'table_four'
-  get 'static_pages/five', to: 'static_pages#five', as: 'table_five'
-  get 'static_pages/six', to: 'static_pages#six', as: 'table_six'
-  get 'static_pages/seven', to: 'static_pages#seven', as: 'table_seven'
+  match 'sales_report' => 'static_pages#sales_report', :via => [:get]
+  match 'daily_sales' => 'static_pages#sales', :via => [:get]
+  match 'monthly_sales' => 'static_pages#monthly', :via => [:get]
+  match 'dine_in' => 'static_pages#table', :via => [:get]
+  match 'takeout' => 'static_pages#takeout', :via => [:get]
+  match 'table_one' => 'static_pages#one', :via => [:get]
+  match 'table_two' => 'static_pages#two', :via => [:get]
+  match 'table_three' => 'static_pages#three', :via => [:get]
+  match 'table_four' => 'static_pages#four', :via => [:get]
+  match 'table_five' => 'static_pages#five', :via => [:get]
+  match 'table_six' => 'static_pages#six', :via => [:get]
+  match 'table_seven' => 'static_pages#seven', :via => [:get]
 
   resources :products
   resources :inventories
