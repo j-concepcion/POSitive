@@ -8,13 +8,18 @@ class OrderSlipsController < ApplicationController
   def index
   end
 
+  def close
+    @q = OrderSlip.search(params[:q])
+    @order_slips = @q.result.where(:open=>false).page(params[:page]).per(50)
+    # @order_slips = OrderSlip.where(:open => false).all
+  end
+
   # GET /order_slips/1
   def show
   end
 
   # GET /order_slips/new
   def new
-    @order_slip.order_date = Date.today
     @order_slip.order_slip_items.build
   end
 
@@ -74,7 +79,7 @@ class OrderSlipsController < ApplicationController
 
   # def activate
   #   @order_slip.update_attribute(:open, true)
-  #   redirect_to order_slips_url, notice: 'Order slip was successfully opened.'
+  #   redirect_to @order_slip, notice: 'Order slip was successfully opened.'
   # end
 
   def split
@@ -115,7 +120,7 @@ class OrderSlipsController < ApplicationController
  
     # Only allow a trusted parameter "white list" through.
     def order_slip_params
-      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :takeout_type, :order_date, :user_id, :open,
+      params.require(:order_slip).permit(:order_type, :table_number, :takeout_number, :takeout_type, :user_id, :open, :created_at, :updated_at,
         order_slip_items_attributes: [:id, :product_id, :quantity, :_destroy])
     end
 
@@ -129,7 +134,7 @@ class OrderSlipsController < ApplicationController
       @q = OrderSlip.search(order_slip_search_params, auth_object: current_user)
       @order_slips = @q.result(distinct: true).accessible_by(current_ability).page params[:page]
     end
-    
+
     def build_order_slip
       @order_slip = OrderSlip.new(order_slip_params)
     end

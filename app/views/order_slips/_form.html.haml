@@ -2,7 +2,6 @@
   = form_error_notification(f)
   .col-md-5
     = f.input :open#, as: :hidden, input_html: {value: true}
-    = f.input :order_date, as: :string, input_html: { 'data-provide' => 'datepicker'}, label: "Date"
     = f.input :order_type, collection: OrderSlip::TYPES, as: :radio_buttons
     = f.input :table_number, collection: OrderSlip::TABLES
     = f.input :takeout_number

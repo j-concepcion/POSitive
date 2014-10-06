@@ -9,9 +9,11 @@
         %li= link_to 'Takeout', takeout_path
         %li.divider
         %li= link_to 'All', order_slips_path
+        %li.divider
+        %li= link_to 'Closed', close_order_slips_path
     %li= link_to 'Menu', products_path
     %li= link_to 'Inventory', inventories_path
-    -# %li= link_to 'Sales', daily_sales_path
+    / %li= link_to 'Sales', daily_sales_path
     %li.dropdown
       %a.dropdown-toggle{"href" => '#', "data-toggle" => 'dropdown'}
         Sales Report
@@ -19,4 +21,3 @@
       %ul.dropdown-menu{role: 'menu'}
         %li= link_to 'Daily', daily_sales_path
         %li= link_to 'Monthly', monthly_sales_path
-    

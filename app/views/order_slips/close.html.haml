@@ -2,7 +2,7 @@
   .col-md-12
     .page-header
       %h1
-        Order Slips Index
+        Closed Order Slips
         = link_to new_order_slip_path, class: "btn btn-primary btn-xs", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add order_slip" do
           %span.glyphicon.glyphicon-plus
 .row
@@ -61,11 +61,11 @@
                   = link_to edit_order_slip_path(order_slip) do
                     %span.glyphicon.glyphicon-edit
                     Edit
-                - if (order_slip.open?)    
+                - if !(order_slip.open?)    
                   %li
-                    = link_to archive_order_slip_path(order_slip) do
+                    = link_to activate_order_slip_path(order_slip) do
                       %span.glyphicon.glyphicon-check
-                      Close  
+                      Open  
                 - if (order_slip.open?)
                   %li.divider
                   %li
