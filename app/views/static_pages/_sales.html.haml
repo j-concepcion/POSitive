@@ -1,170 +1,176 @@
 .row
   .col-md-12
     .page-header
-      %h1 Sales
+      %h1 Daily Sales
+      %p
+      %h3= "Date: " + @report_date.strftime("%B %d, %Y")
 
-%table.table.table-condensed.table-hover
-  %tr
-    %th Date
-    %td
-    %td
-    %td= @report_date.strftime("%d %b %y")
-    / %td= Date.today.strftime("%d %b %y")
-  %tr
-    %th Specials
-    %th Quantity
-    %th Item Price
-    %th Sold per Item
-  - Product.where(:category=>"Special").each do |prod|
-    - @total = 0
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)
-    - @total = @total + @items_sold
+      - previous_day = @report_date - 1
+      = link_to sales_report_create_path('date[day]'=> previous_day.day, 'date[month]'=> previous_day.month, 'date[year]'=> previous_day.year, :report_type=>"daily"), class: "btn btn-default", "data-toggle" => "tooltip", "data-placement" => "top", title: "Previous Day" do
+        %span.glyphicon.glyphicon-chevron-left
+        Previous Day
 
-  %tr
-    %th Silog
-    %th
-    %th
-    %th
-  - Product.where(:category=>"Silog").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)      
-    - @total = @total + @items_sold
+      - next_day = @report_date + 1
+      = link_to sales_report_create_path('date[day]'=> next_day.day, 'date[month]'=> next_day.month, 'date[year]'=> next_day.year, :report_type=>"daily"), class: "btn btn-default", "data-toggle" => "tooltip", "data-placement" => "top", title: "Previous Day" do
+        %span.glyphicon.glyphicon-chevron-right
+        Next Day
 
-  %tr
-    %th Classic
-    %th 
-    %th
-    %th
-  - Product.where(:category=>"Classic").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)
-    - @total = @total + @items_sold
+    %table.table.table-condensed.table-hover
+      %tr
+        %th Specials
+        %th Quantity
+        %th Item Price
+        %th Sold per Item
+      - Product.where(:category=>"Special").each do |prod|
+        - @total = 0
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)
+        - @total = @total + @items_sold
 
-  %tr
-    %th Rice Toppings
-    %th 
-    %th
-    %th
-  - Product.where(:category=>"Rice Topping").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)
-    - @total = @total + @items_sold
-  
-  %tr
-    %th Noodles
-    %th 
-    %th
-    %th
-  - Product.where(:category=>"Noodles").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)
-    - @total = @total + @items_sold
+      %tr
+        %th Silog
+        %th
+        %th
+        %th
+      - Product.where(:category=>"Silog").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)      
+        - @total = @total + @items_sold
 
-  %tr
-    %th Sandwich
-    %th 
-    %th
-    %th
-  - Product.where(:category=>"Sandwich").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)            
-    - @total = @total + @items_sold
+      %tr
+        %th Classic
+        %th 
+        %th
+        %th
+      - Product.where(:category=>"Classic").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)
+        - @total = @total + @items_sold
 
-  %tr
-    %th Drink
-    %th 
-    %th
-    %th
-  - Product.where(:category=>"Drink").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)
-    - @total = @total + @items_sold
+      %tr
+        %th Rice Toppings
+        %th 
+        %th
+        %th
+      - Product.where(:category=>"Rice Topping").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)
+        - @total = @total + @items_sold
+      
+      %tr
+        %th Noodles
+        %th 
+        %th
+        %th
+      - Product.where(:category=>"Noodles").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)
+        - @total = @total + @items_sold
 
-  %tr
-    %th Cigarettes
-    %th 
-    %th
-    %th
-  - Product.where(:category=>"Cigarettes").each do |prod|
-    - @item_qty = 0
-    %tr
-      %td= prod.item_name
-      - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", Date.today.beginning_of_day, Date.today.end_of_day, false).each do |tab|
-        - tab.order_slip_items.each do |tab_item|
-          - if (prod.item_name == Product.find(tab_item.product_id).item_name)
-            - @item_qty = @item_qty + tab_item.quantity
-      %td= @item_qty
-      %td= number_with_precision(prod.price, precision: 2)
-      - @items_sold = @item_qty * prod.price
-      %td= number_with_precision(@items_sold, precision: 2)
-    - @total = @total + @items_sold
- 
-  %tr
-    %th Total Sales
-    %td
-    %td
-    %td= @total
+      %tr
+        %th Sandwich
+        %th 
+        %th
+        %th
+      - Product.where(:category=>"Sandwich").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)            
+        - @total = @total + @items_sold
+
+      %tr
+        %th Drink
+        %th 
+        %th
+        %th
+      - Product.where(:category=>"Drink").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)
+        - @total = @total + @items_sold
+
+      %tr
+        %th Cigarettes
+        %th 
+        %th
+        %th
+      - Product.where(:category=>"Cigarettes").each do |prod|
+        - @item_qty = 0
+        %tr
+          %td= prod.item_name
+          - OrderSlip.where("created_at >= ? and created_at < ? and open = ?", @report_date.beginning_of_day, @report_date.end_of_day, false).each do |tab|
+            - tab.order_slip_items.each do |tab_item|
+              - if (prod.item_name == Product.find(tab_item.product_id).item_name)
+                - @item_qty = @item_qty + tab_item.quantity
+          %td= @item_qty
+          %td= number_with_precision(prod.price, precision: 2)
+          - @items_sold = @item_qty * prod.price
+          %td= number_with_precision(@items_sold, precision: 2)
+        - @total = @total + @items_sold
+     
+      %tr
+        %th.h3 Total Sales
+        %td
+        %td
+        %td.h3= @total

@@ -1,13 +1,14 @@
 class StaticPagesController < ApplicationController	
 	skip_authorization_check
 	# authorize_resource :class => false
+
   def sales_report_create
     # @report_date = params[:date]
-    @report_date = Date.parse("#{params[:date]['day']}-#{params[:date]['month']}-#{params[:date]['year']}") if params[:date]
+     @report_date = Date.parse("#{params[:date]['day']}-#{params[:date]['month']}-#{params[:date]['year']}") if params[:date]
     if params[:report_type]["daily"]
-      render layout: 'sales'
-    else
-      render layout: 'monthly'
+      render file: 'static_pages/_sales'
+    else params[:report_type]["_monthly"]
+      render file: 'static_pages/_monthly'
     end  
     # raise 'got here!'
   end
