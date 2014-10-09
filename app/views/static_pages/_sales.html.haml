@@ -11,9 +11,10 @@
         Previous Day
 
       - next_day = @report_date + 1
-      = link_to sales_report_create_path('date[day]'=> next_day.day, 'date[month]'=> next_day.month, 'date[year]'=> next_day.year, :report_type=>"daily"), class: "btn btn-default", "data-toggle" => "tooltip", "data-placement" => "top", title: "Previous Day" do
-        %span.glyphicon.glyphicon-chevron-right
-        Next Day
+      - if (next_day != Date.tomorrow)
+        = link_to sales_report_create_path('date[day]'=> next_day.day, 'date[month]'=> next_day.month, 'date[year]'=> next_day.year, :report_type=>"daily"), class: "btn btn-default", "data-toggle" => "tooltip", "data-placement" => "top", title: "Previous Day" do
+          %span.glyphicon.glyphicon-chevron-right
+          Next Day
 
     %table.table.table-condensed.table-hover
       %tr
