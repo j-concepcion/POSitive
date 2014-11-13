@@ -61,7 +61,7 @@
                       Edit
                   - if (order_slip.open?)    
                     %li
-                      = link_to archive_order_slip_path(order_slip) do
+                      = link_to archive_order_slip_path(order_slip), :method => :get, :data => { :confirm => 'Bill Out?' }  do
                         %span.glyphicon.glyphicon-check
                         Close  
                   - if (order_slip.open?)

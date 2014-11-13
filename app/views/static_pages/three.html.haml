@@ -12,10 +12,10 @@
     .col-md-12
       - OrderSlip.all.each do |slip|
         %table.table.table-striped.table-condensed
-          - if slip.table_number.starts_with? '3'
+          - if (slip.table_number.starts_with? '3' and slip.open?)
             %tr
               %th Date:
-              %td= slip.order_date.strftime("%d %b %y")
+              %td= slip.created_at.strftime("%d %b %y")
             %tr
               %th Order Type:
               %td= slip.order_type

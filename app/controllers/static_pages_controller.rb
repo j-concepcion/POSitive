@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController	
-	skip_authorization_check
+  skip_authorization_check
 	# authorize_resource :class => false
 
   def sales_report_create

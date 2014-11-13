@@ -27,9 +27,9 @@
         %th= sort_link(@q, :item_name)
         %th= sort_link(@q, :quantity)
         %th= sort_link(@q, :inventory_type)
-        - OrderSlip.all.each do |slip|
-          - if (slip.created_at < Date.today and slip.open?)
-            %th For Payment
+        / - OrderSlip.all.each do |slip|
+        /   - if (slip.created_at < Date.today and slip.open?)
+        %th= sort_link(@q, :for_payment)
         %th
       - @inventories.each do |inventory|
         - if (inventory.quantity <= 5)
@@ -41,6 +41,8 @@
               - open_os.order_slip_items.each do |osi|
                 - if (osi.product_id == inventory.id)
                   %td osi.quantity
+                - else
+                  %td
             %td
               .btn-group.btn-group-xs
                 = link_to inventory, class: 'btn btn-primary' do
@@ -67,6 +69,8 @@
               - open_os.order_slip_items.each do |osi|
                 - if (osi.product_id == inventory.id)
                   %td osi.quantity
+                - else
+                  %td
             %td
               .btn-group.btn-group-xs
                 = link_to inventory, class: 'btn btn-primary' do
